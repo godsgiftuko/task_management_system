@@ -44,32 +44,32 @@ export class TransformInterceptor<T>
             data: data?.records || data,
             meta: data.pagination,
           });
-          respData.message = respData.message || 'Tasks fetched successfully';
+          respData.message = respData.message || 'Records fetched successfully';
           delete data.pagination;
         }
 
         if (data && respData.statusCode == HttpStatus.CREATED) {
-          respData.message = `Task(s) created successfully`;
+          respData.message = `Record(s) created successfully`;
         }
 
         if (data && respData.statusCode == HttpStatus.OK) {
-          respData.message = 'Task(s) fetched successfully';
+          respData.message = 'Record(s) fetched successfully';
         }
 
         if (!data && respData.statusCode == HttpStatus.OK) {
-          respData.message = 'Task not found';
+          respData.message = 'Record not found';
         }
 
         if (data && respData.statusCode == HttpStatus.OK) {
-          respData.message = 'Task(s) fetched successfully';
+          respData.message = 'Record(s) fetched successfully';
         }
 
         if (request.method == HttpMethod.DELETE) {
-          respData.message = 'Task(s) deleted successfully';
+          respData.message = 'Record(s) deleted successfully';
         }
 
         if (request.method == HttpMethod.PUT) {
-          respData.message = 'Task(s) updated successfully';
+          respData.message = 'Record(s) updated successfully';
         }
 
         // -------------------------------------

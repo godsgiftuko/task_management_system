@@ -46,10 +46,11 @@ export class EnvConfig {
   @IsNumber()
   SERVER_PORT: number;
 
-  // OTHERS
+  // JWT
   @IsString()
   JWT_SECRET: string;
 
+  // OTHERS
   @IsString()
   API_VERSION: string;
 
@@ -68,8 +69,9 @@ export class EnvConfig {
       (obj.NODE_ENV = (process.env.NODE_ENV as NODE_ENV) || 'development'),
       (obj.SERVER_NAME = process.env.SERVER_NAME || 'Task Management System'),
       (obj.SERVER_PORT = +process.env.SERVER_PORT || 8000);
-    // OTHERS
+    // JWT
     obj.JWT_SECRET = process.env.JWT_SECRET || 'JWT_SECRET';
+    // OTHERS
     obj.API_VERSION = 'api/v1';
 
     return obj;
