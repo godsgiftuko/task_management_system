@@ -8,7 +8,6 @@ const logger = new Logger('EmailUtils');
 export class EmailUtils {
   static isEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
   }
 
   static async validateEmail(email): Promise<boolean> {

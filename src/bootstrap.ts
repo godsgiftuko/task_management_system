@@ -34,7 +34,9 @@ export class Bootstrap {
     app.useGlobalPipes(new ValidationPipe());
 
     await app.listen(PORT, () => {
-      this.logger.log(`${this.serverName} is up on port ${this.serverPort}`);
+      this.logger.verbose(
+        `${this.serverName} is up on port ${this.serverPort}`,
+      );
     });
   }
 }
