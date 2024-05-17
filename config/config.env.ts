@@ -61,7 +61,7 @@ export class EnvConfig {
     const obj = new EnvConfig();
 
     // DATABASE
-    (obj.USE_SQLITE = Boolean(process.env.USE_SQLITE || true)),
+    (obj.USE_SQLITE = Boolean(process.env.USE_SQLITE)),
     (obj.DATABASE_DIALECT = process.env.DATABASE_DIALECT || 'mysql'),
       (obj.DATABASE_USER = process.env.DATABASE_USER),
       (obj.DATABASE_HOST = process.env.DATABASE_HOST),

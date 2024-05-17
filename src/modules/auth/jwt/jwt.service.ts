@@ -4,9 +4,9 @@ import { sign, verify } from 'jsonwebtoken';
 import { JwtPayload } from './jwt-payload.type';
 
 @Injectable()
-export class CustomJwtService {
+export class JwtService {
   private readonly jwtPrivateKey: string;
-  private readonly jwtExpiresIn = '1';
+  private readonly jwtExpiresIn = '60m';
 
   constructor() {
     this.jwtPrivateKey = configs.JWT_SECRET;
@@ -16,9 +16,7 @@ export class CustomJwtService {
     const payload: JwtPayload = {
       id: userId,
     };
-    return sign(payload, this.jwtPrivateKey, {
-      expiresIn: this.jwtExpiresIn,
-    });
+    return sign(payload, this.jwtPrivateKey, { expiresIn: this.jwtExpiresIn });
   }
 
   async refreshToken(oldToken: string) {
@@ -31,8 +29,8 @@ export class CustomJwtService {
       return {
         access_token,
       };
-    } catch (e) {
-      throw new Error('Invalid refresh token');
+    } catch (error) {
+      throw new Error('Invalid refresh token: ' + JSON.stringify(error));
     }
   }
 }

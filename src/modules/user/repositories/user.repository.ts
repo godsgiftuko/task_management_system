@@ -8,27 +8,27 @@ import { UserDto } from '../dtos/user.dto';
 export class UserRepository {
   constructor(
     @InjectRepository(User)
-    private readonly userRepo: Repository<User>,
+    private readonly userEntity: Repository<User>,
   ) {}
 
   // Add User
   create(userDto?: Partial<UserDto>): Promise<User> {
-    const newCustomer = this.userRepo.create(userDto);
-    return this.userRepo.save(newCustomer);
+    const newCustomer = this.userEntity.create(userDto);
+    return this.userEntity.save(newCustomer);
   }
 
   // Find One User
   findOne(findOpts: FindOneOptions<User>): Promise<User> {
-    return this.userRepo.findOne(findOpts);
+    return this.userEntity.findOne(findOpts);
   }
 
   // Find Users
   findAllRecords(findOpts: FindManyOptions<User>): Promise<[User[], number]> {
-    return this.userRepo.findAndCount(findOpts);
+    return this.userEntity.findAndCount(findOpts);
   }
 
   // Update User
   updateUser(id: string, updates: Partial<User>): void {
-    this.userRepo.update({ id }, updates);
+    this.userEntity.update({ id }, updates);
   }
 }

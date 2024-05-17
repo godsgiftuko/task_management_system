@@ -5,7 +5,7 @@ import User from '../user/entities/user.entity';
 import { UserDto } from '../user/dtos/user.dto';
 import { UserService } from '../user/services/user.service';
 import { SignAccessTokenDto } from './dtos/sign_access_token.dto';
-import { CustomJwtService } from './jwt/jwt.service';
+import { JwtService } from './jwt/jwt.service';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(
     private readonly userService: UserService,
-    private readonly jwtService: CustomJwtService,
+    private readonly jwtService: JwtService,
   ) {
     this.jwtPrivateKey = configs.JWT_SECRET;
   }
@@ -23,7 +23,33 @@ export class AuthService {
     return bcrypt.hash(password, salt);
   }
 
-  async registerUser(userDto: UserDto): Promise<User> {
+  static comparePassword(password: string, hashedPassword: string) {
+    return bcrypt.compare(password, hashedPassword);
+  }
+
+  // Validate User
+  async validateUser(email: string, password: string): Promise<User> {
+    const user = await this.userService.findOne({
+      where: { email },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    const passwordMatch = await AuthService.comparePassword(
+      password,
+      user.password,
+    );
+
+    if (!passwordMatch) {
+      return null;
+    }
+
+    return user;
+  }
+
+  async registerUser(userDto: UserDto) {
     const exist = await this.userService.findOneByEmail(userDto.email);
     if (exist) {
       throw new HttpException(
@@ -31,7 +57,6 @@ export class AuthService {
         HttpStatus.BAD_REQUEST,
       );
     }
-
     userDto.password = await AuthService.hashPassword(userDto.password);
     return this.userService.addUser(userDto);
   }

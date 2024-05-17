@@ -5,6 +5,7 @@ import { UserRepository } from '../repositories/user.repository';
 import User from '../entities/user.entity';
 import { UserDto } from '../dtos/user.dto';
 import { UserEvents } from 'src/shared/events/user.events';
+// import { AuthService } from 'src/modules/auth/auth.service';
 
 @Injectable()
 export class UserService {
