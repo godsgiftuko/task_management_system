@@ -27,6 +27,11 @@ export class Bootstrap {
     app.useGlobalInterceptors(new TransformInterceptor());
     app.useGlobalFilters(new AllExceptionsFilter());
 
+    app.enableCors({
+      allowedHeaders: '*',
+      origin: '*', // Restrict requesting clients.
+    });
+
     app.setGlobalPrefix(configs.API_VERSION, {
       exclude: this.routesToExclude,
     });
