@@ -16,7 +16,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   // Register user
-  @Post('sign-up')
+  @Post('register')
   async addCustomer(@Body() userPayload: UserDto) {
     const validEmail = await EmailUtils.validateEmail(userPayload.email);
     if (!validEmail) {

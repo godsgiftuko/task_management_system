@@ -15,6 +15,9 @@ type NODE_ENV = (typeof NODE_ENVS)[number];
 
 export class EnvConfig {
   // DATABASE
+  @IsBoolean()
+  USE_SQLITE: boolean;
+
   @IsString()
   DATABASE_DIALECT: string;
 
@@ -58,6 +61,7 @@ export class EnvConfig {
     const obj = new EnvConfig();
 
     // DATABASE
+    (obj.USE_SQLITE = Boolean(process.env.USE_SQLITE || true)),
     (obj.DATABASE_DIALECT = process.env.DATABASE_DIALECT || 'mysql'),
       (obj.DATABASE_USER = process.env.DATABASE_USER),
       (obj.DATABASE_HOST = process.env.DATABASE_HOST),
