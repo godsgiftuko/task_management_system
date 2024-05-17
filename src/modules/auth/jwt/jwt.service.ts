@@ -6,7 +6,7 @@ import { JwtPayload } from './jwt-payload.type';
 @Injectable()
 export class JwtService {
   private readonly jwtPrivateKey: string;
-  private readonly jwtExpiresIn = '60m';
+  private readonly jwtExpiresIn = configs.JWT_EXPIRY;
 
   constructor() {
     this.jwtPrivateKey = configs.JWT_SECRET;

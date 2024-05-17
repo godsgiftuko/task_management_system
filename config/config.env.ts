@@ -53,6 +53,9 @@ export class EnvConfig {
   @IsString()
   JWT_SECRET: string;
 
+  @IsString()
+  JWT_EXPIRY: string;
+
   // OTHERS
   @IsString()
   API_VERSION: string;
@@ -75,6 +78,7 @@ export class EnvConfig {
       (obj.SERVER_PORT = +process.env.SERVER_PORT || 8000);
     // JWT
     obj.JWT_SECRET = process.env.JWT_SECRET || 'JWT_SECRET';
+    obj.JWT_EXPIRY = process.env.JWT_EXPIRY || '1m';
     // OTHERS
     obj.API_VERSION = 'api/v1';
 
