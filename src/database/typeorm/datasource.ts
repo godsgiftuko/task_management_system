@@ -30,7 +30,7 @@ class Database {
   get sqliteConfigs(): DataSourceOptions {
     return {
       type: 'sqlite',
-      database: join(__dirname, '..', 'locals', configs.DATABASE_NAME),
+      database: join(__dirname, '..', 'sqlite', configs.DATABASE_NAME),
       entities: [`${__dirname}/../../**/*.entity.{ts,js}`],
       migrations: [join(__dirname, '..', 'migrations/*.{ts,js}')],
       namingStrategy: new TypeOrmNamingStrategy(),
