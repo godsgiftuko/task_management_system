@@ -78,7 +78,7 @@ export class EnvConfig {
       (obj.SERVER_PORT = +process.env.SERVER_PORT || 8000);
     // JWT
     obj.JWT_SECRET = process.env.JWT_SECRET || 'JWT_SECRET';
-    obj.JWT_EXPIRY = process.env.JWT_EXPIRY || '1m';
+    obj.JWT_EXPIRY = process.env.JWT_EXPIRY || '10m';
     // OTHERS
     obj.API_VERSION = 'api/v1';
 
