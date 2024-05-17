@@ -53,15 +53,11 @@ export class TransformInterceptor<T>
         }
 
         if (data && respData.statusCode == HttpStatus.OK) {
-          respData.message = 'Task(s) fetched successfully';
+          respData.message = `Task${Array.isArray(respData.data) ? '(s)' : ''} fetched successfully`;
         }
 
         if (!data && respData.statusCode == HttpStatus.OK) {
           respData.message = 'Task not found';
-        }
-
-        if (data && respData.statusCode == HttpStatus.OK) {
-          respData.message = 'Task fetched successfully';
         }
 
         if (request.method == HttpMethod.DELETE) {

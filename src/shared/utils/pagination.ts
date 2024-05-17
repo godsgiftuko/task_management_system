@@ -19,10 +19,10 @@ export const calculate_pagination = (
   };
 };
 
-export const calculate_pagination_data = (
+export const paginate_records = (
   data: any[],
-  page: number,
-  limit: number,
+  page: number = 0,
+  limit: number = 10,
 ): PaginationData => {
   const [records, totalItems] = data;
   const currentPage = page ? +page : 0;

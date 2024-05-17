@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 import Task from './task.entity';
 import { TaskDto } from './task.dto';
 
@@ -38,7 +43,7 @@ export class TaskRepository {
   }
 
   // Update Task
-  updateTask(id: string, updates: Partial<Task>): void {
-    this.taskEntity.update({ id }, updates);
+  updateTask(id: string, updates: Partial<Task>): Promise<UpdateResult> {
+    return this.taskEntity.update({ id }, updates);
   }
 }
