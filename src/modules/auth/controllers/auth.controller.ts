@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 import { EmailUtils } from 'src/shared/utils/email.utils';
-import { UserDto } from 'src/modules/user/dtos/user.dto';
+import { UserDto } from 'src/modules/user/user.dto';
 import { SignAccessTokenDto } from '../dtos/sign_access_token.dto';
 import { apiResponse } from 'src/shared/helpers/api_response.helper';
 import { LocalAuthGuard } from '../guards/local-auth.guard';

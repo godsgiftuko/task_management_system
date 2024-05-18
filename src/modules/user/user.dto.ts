@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import User from '../entities/user.entity';
+import User from './user.entity';
 
 export class UserDto extends User {
   @IsEmail()

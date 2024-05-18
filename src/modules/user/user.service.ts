@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { FindOneOptions, FindManyOptions } from 'typeorm';
-import { UserRepository } from '../repositories/user.repository';
-import User from '../entities/user.entity';
-import { UserDto } from '../dtos/user.dto';
+import { UserRepository } from './user.repository';
+import User from './user.entity';
+import { UserDto } from './user.dto';
 import { UserEvents } from 'src/shared/events/user.events';
 // import { AuthService } from 'src/modules/auth/auth.service';
 

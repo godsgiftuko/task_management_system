@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { ETaskStatus } from './task_status.enum';
 import { configs } from 'config/config.env';
-import User from '../user/entities/user.entity';
+import User from '../user/user.entity';
 
 const statusColOpts = getTaskStatusColOpts();
 
