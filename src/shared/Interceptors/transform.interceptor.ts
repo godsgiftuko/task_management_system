@@ -56,16 +56,19 @@ export class TransformInterceptor<T>
           respData.message = `Task${Array.isArray(respData.data) ? '(s)' : ''} fetched successfully`;
         }
 
-        if (!data && respData.statusCode == HttpStatus.OK) {
-          respData.message = 'Task not found';
-        }
-
         if (request.method == HttpMethod.DELETE) {
           respData.message = 'Task(s) deleted successfully';
         }
 
         if (request.method == HttpMethod.PUT) {
           respData.message = 'Task(s) updated successfully';
+        }
+
+        if (
+          !data &&
+          [HttpMethod.DELETE, HttpStatus.OK].includes(respData.statusCode)
+        ) {
+          respData.message = 'Task not found';
         }
 
         // -------------------------------------

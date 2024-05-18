@@ -4,6 +4,9 @@ type ApiResponseShape = {
 };
 
 export function apiResponse(result: ApiResponseShape) {
-  Object.assign(result.data, { serviceMessage: result.message });
-  return result.data;
+  if (result.data) {
+    Object.assign(result.data, { serviceMessage: result?.message });
+    return result.data;
+  }
+  return null;
 }
