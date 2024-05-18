@@ -6,6 +6,7 @@ import { TaskDto } from './task.dto';
 import { TaskEvents } from 'src/shared/events/task.events';
 import Task from './task.entity';
 import { paginate_records } from 'src/shared/utils/pagination';
+import { PaginationData } from 'src/shared/types/pagination';
 
 @Injectable()
 export class TaskService {
@@ -15,9 +16,9 @@ export class TaskService {
   ) {}
 
   // Add Task
-  async addTask(taskDto: TaskDto): Promise<Task> {
+  async addTask(taskDto: TaskDto, userId: string): Promise<Task> {
     try {
-      const task = await this.taskRepo.create(taskDto);
+      const task = await this.taskRepo.create({ ...taskDto, userId });
       this.taskEvent.emit(TaskEvents.CREATED, task);
       return task;
     } catch (error) {
@@ -38,7 +39,7 @@ export class TaskService {
   }
 
   // Fetch Tasks
-  async fetchTasks(findOpts: FindManyOptions<Task>): Promise<any> {
+  async fetchTasks(findOpts: FindManyOptions<Task>): Promise<PaginationData> {
     try {
       const records = await this.taskRepo.findAllRecords(findOpts);
       return paginate_records(records, findOpts.skip, findOpts.take);
@@ -48,10 +49,14 @@ export class TaskService {
   }
 
   // Delete Task
-  async deleteTask(id: string): Promise<void> {
+  async deleteTask(id: string, userId: string): Promise<boolean | null> {
     try {
-      const task = await this.findOneById(id);
+      const task = await this.findOne({
+        where: { id, userId },
+      });
+      if (!task) return null;
       await this.taskRepo.deleteTask(task);
+      return true;
     } catch (err) {
       throw `Failed to delete task: ${id}`;
     }
@@ -67,12 +72,22 @@ export class TaskService {
   }
 
   // Update Task
-  async updateTask(id: string, updates: Partial<Task>): Promise<Task> {
+  async updateTask(
+    updates: Partial<Task>,
+    id: string,
+    userId: string,
+  ): Promise<Task> {
     try {
-      const updated = await this.taskRepo.updateTask(id, updates);
+      const task = await this.findOne({
+        where: { id, userId },
+      });
+      if (!task) return null;
+
+      const updated = await this.taskRepo.updateTask(updates, id, userId);
       if (updated) {
         return this.findOneById(id);
       }
+
       throw new HttpException(
         `Failed to update task: ${id}`,
         HttpStatus.EXPECTATION_FAILED,

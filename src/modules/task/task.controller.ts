@@ -1,11 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { TaskService } from './task.service';
 import { BulkDeleteTaskDto, TaskDto } from './task.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
-import { GetUser } from '../auth/decorators/get_user.decorator';
-import User from '../user/entities/user.entity';
 import { apiResponse } from 'src/shared/helpers/api_response.helper';
 import { FindDataRequestDto } from 'src/shared/dtos/find.data.request.dto';
+import { GetUser } from 'src/shared/decorators/get_user.decorator';
 
 @Controller('tasks')
 @UseGuards(JwtAuthGuard)
@@ -14,8 +23,8 @@ export class TaskController {
 
   // make sure task are tid to user
   @Post('new')
-  async addTask(@Body() taskPayload: TaskDto) {
-    const data = await this.taskService.addTask(taskPayload);
+  async addTask(@Body() taskPayload: TaskDto, @GetUser('id') userId: string) {
+    const data = await this.taskService.addTask(taskPayload, userId);
     return apiResponse({
       data,
       message: 'Added task successfully!',
@@ -24,34 +33,49 @@ export class TaskController {
 
   // User can get task by ID
   @Get('/id/:id')
-  getTask(@Param('id') taskId: string) {
-    return this.taskService.findOneById(taskId);
+  async getTask(@Param('id') id: string, @GetUser('id') userId: string) {
+    const data = await this.taskService.findOne({
+      where: { id, userId },
+    });
+    return apiResponse({ data });
   }
 
   // User can get tasks
   @Get()
-  getTasks(@Query() queries: FindDataRequestDto) {
-    return this.taskService.fetchTasks({
+  async getTasks(
+    @Query() queries: FindDataRequestDto,
+    @GetUser('id') userId: string,
+  ) {
+    const data = await this.taskService.fetchTasks({
+      where: { userId },
       take: Number(queries.take || '10'),
       skip: Number(queries.skip || '0'),
     });
+    return apiResponse({ data });
   }
 
   // User can update a task
   @Put('/id/:id')
-  updateTask(@Body() taskPayload: TaskDto, @Param('id') taskId: string) {
-    return this.taskService.updateTask(taskId, taskPayload);
+  async updateTask(
+    @Body() taskPayload: TaskDto,
+    @Param('id') taskId: string,
+    @GetUser('id') userId: string,
+  ) {
+    const data = await this.taskService.updateTask(taskPayload, taskId, userId);
+    return apiResponse({ data });
   }
 
   // User can delete a task
   @Delete('/id/:id')
-  deleteTask(@Param('id') taskId: string) {
-    return this.taskService.deleteTask(taskId);
+  async deleteTask(@Param('id') taskId: string, @GetUser('id') userId: string,) {
+    const data = await this.taskService.deleteTask(taskId, userId);
+    return apiResponse({ data });
   }
 
   // User can delete many tasks
   @Delete()
-  deleteManyTask(@Body() { taskIds }: BulkDeleteTaskDto) {
-    return this.taskService.deleteManyTasks(taskIds);
+  async deleteManyTask(@Body() { taskIds }: BulkDeleteTaskDto) {
+    const data = await this.taskService.deleteManyTasks(taskIds);
+    return apiResponse({ data });
   }
 }

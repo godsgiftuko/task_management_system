@@ -43,7 +43,11 @@ export class TaskRepository {
   }
 
   // Update Task
-  updateTask(id: string, updates: Partial<Task>): Promise<UpdateResult> {
-    return this.taskEntity.update({ id }, updates);
+  updateTask(
+    updates: Partial<Task>,
+    id: string,
+    userId: string,
+  ): Promise<UpdateResult> {
+    return this.taskEntity.update({ id, userId }, updates);
   }
 }

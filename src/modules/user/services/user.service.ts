@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { FindOneOptions, FindManyOptions } from 'typeorm';
 import { UserRepository } from '../repositories/user.repository';
 import User from '../entities/user.entity';
@@ -34,6 +34,7 @@ export class UserService {
   }
 
   // Find User ById
+  @OnEvent(UserEvents.FOUND_ONE)
   findOneById(id: string): Promise<User> {
     return this.userRepo.findOne({
       where: { id },
