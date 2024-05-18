@@ -49,6 +49,6 @@ class Database {
     return new DataSource(dataSourceOptions);
   }
 }
-
-const dataSource = new Database().connect(configs.USE_SQLITE);
+const isSqlite = Boolean(!(process.env.USE_SQLITE == 'false'));
+const dataSource = new Database().connect(isSqlite);
 export default dataSource;
