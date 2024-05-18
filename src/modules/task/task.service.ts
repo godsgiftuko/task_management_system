@@ -3,10 +3,10 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { FindOneOptions, FindManyOptions } from 'typeorm';
 import { TaskRepository } from './task.repository';
 import { TaskDto } from './task.dto';
-import { TaskEvents } from 'src/shared/events/task.events';
 import Task from './task.entity';
 import { paginate_records } from 'src/shared/utils/pagination';
 import { PaginationData } from 'src/shared/types/pagination';
+import { TaskEvents } from './task.events.enum';
 
 @Injectable()
 export class TaskService {

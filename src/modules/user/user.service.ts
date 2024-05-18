@@ -4,7 +4,7 @@ import { FindOneOptions, FindManyOptions } from 'typeorm';
 import { UserRepository } from './user.repository';
 import User from './user.entity';
 import { UserDto } from './user.dto';
-import { UserEvents } from 'src/shared/events/user.events';
+import { UserEvents } from './user.events.enum';
 // import { AuthService } from 'src/modules/auth/auth.service';
 
 @Injectable()
