@@ -6,9 +6,11 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   VersionColumn,
+  ManyToOne,
 } from 'typeorm';
 import { ETaskStatus } from './task_status.enum';
 import { configs } from 'config/config.env';
+import User from '../user/entities/user.entity';
 
 const statusColOpts = getTaskStatusColOpts();
 
@@ -25,6 +27,12 @@ export default class Task {
 
   @Column(statusColOpts)
   status: ETaskStatus;
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  user: User;
+
+  @Column()
+  userId: string;
 
   @CreateDateColumn()
   readonly createdAt: Date;

@@ -1,3 +1,4 @@
+import Task from 'src/modules/task/task.entity';
 import {
   Entity,
   Column,
@@ -6,6 +7,7 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   VersionColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -27,6 +29,9 @@ export default class User {
 
   @Column({ default: false, type: 'boolean' })
   verified: boolean;
+
+  @OneToMany(() => Task, (task) => task.user)
+  tasks: Task[];
 
   @CreateDateColumn()
   readonly createdAt: Date;
