@@ -57,6 +57,11 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+**Note:**
+Please, make sure to add `.env` file in the root dir. Provide neccessary env variables to kick start the app.
+<a style="text-decoration: underline" href="https://github.com/godsgiftuko/task_management_system/blob/main/.env.example" target="blank"> Check out the .env.example
+</a> file.
+
 ## API Documentation
 
 <p align="center">
