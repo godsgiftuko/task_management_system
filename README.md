@@ -1,30 +1,42 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+### Problem statement
+<p>
+Develop a RESTful API for a task management system, incorporating user authentication through JWT tokens to ensure secure access. Implement comprehensive CRUD operations to enable the creation, retrieval, updating, and deletion of tasks. Use a database of your choice for reliable data persistence. Additionally, validate input data to maintain data integrity and security throughout the system.
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Features
+- User Authentication: `/src/modules/auth`
+  - Using JWT tokens for user authentication.
+- Task CRUD Operations: `/src/modules/task`
+	- Create
+	- Get One
+	- Get All
+	- Update
+	- Delete One
+	- Delete All
+	 
+	
+- Data Persistence: `/src/database`
+    - App supports `MySQL` & `SQLite` databases - SQLite is default for quickstart.
+    
+- Input Validation: `/src/**/*.dto.ts`
+    - Using npm `Class validator` and DTO pattern for input payload validation.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Instructions
+Document the following:
+- API endpoints.
+- Data models.
+- Provide clear and concise documentation to aid future developers who may work with your code.
+- Any other relevant information necessary for understanding and using your code.
+- Make sure to create a socket to stream the data created In real-time.
+- Use GitHub to manage your code.
+- Share the repository URL along with any necessary documentation or instructions for running the code through the email thread on Factorial.
+- Please complete the following tasks within 5 days.
 
-## Description
+## Download a copy
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+```bash
+$ git clone https://github.com/godsgiftuko/task_management_system.git
+```
 
 ## Installation
 
@@ -45,29 +57,15 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## API Documentation
 
-```bash
-# unit tests
-$ npm run test
+<p align="center">
+  <a style="text-decoration: underline" href="https://documenter.getpostman.com/view/8901262/2sA3JT3yDG" target="blank">See documentation<img src="https://learndirectus.com/content/images/2022/03/postman.png" width="100%" alt="Nest Logo" /></a>
+</p>
 
-# e2e tests
-$ npm run test:e2e
+## Data models
+- User ER diagram
+![User ER diagram](./src/modules/user/user.er.diagram.png)
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Task ER diagram
+![Task ER diagram](./src/modules/task/task.er.diagram.png)
