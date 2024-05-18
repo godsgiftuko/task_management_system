@@ -57,10 +57,41 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-**Note:**
-Please, make sure to add `.env` file in the root dir. Provide neccessary env variables to kick start the app.
+### Note:
+Please, make sure to add `.env` file in the root dir. Provide neccessary env variables into the file to kick start the app.
 <a style="text-decoration: underline" href="https://github.com/godsgiftuko/task_management_system/blob/main/.env.example" target="blank"> Check out the .env.example
 </a> file.
+
+## Database setup
+In order to use MySQL DB, set `USE_SQLITE=false` in .env and as well the  database variables.
+```bash
+//.env
+DATABASE_USER=""
+DATABASE_PASSWORD=""
+DATABASE_HOST=""
+DATABASE_PORT=""
+DATABASE_NAME=""
+```
+### Migrations
+```bash
+# run database migration
+$ npm run migration:run
+
+# generate migration file
+$ npm run migration:generate --name=[file_name]
+
+# revert database migration
+$ npm run migration:revert
+```
+
+### Note:
+Please, note that anytime you make changes to a `table` in this case an `entity` file, always follow up with the steps below:
+
+- npm run migration:generate --name=[file_name]
+- npm run migration:run
+
+In situations where you need to reverse the previous migration run `npm run migration:revert` CMD.
+
 
 ## API Documentation
 
