@@ -63,7 +63,7 @@ Please, make sure to add `.env` file in the root dir. Provide neccessary env var
 </a> file.
 
 ## Database setup
-In order to use MySQL DB, set `USE_SQLITE=false` in .env and as well the  database variables.
+In order to use MySQL DB, set `USE_SQLITE=false` in .env and as well provide the  database variables.
 ```bash
 //.env
 DATABASE_USER=""
